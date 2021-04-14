@@ -4,14 +4,16 @@ public class EnigmaMachine{
    private int rotor1Offset;
    private int rotor2Offset;
    private int rotor3Offset;
+   public String string1;
    //Constructor, initialize board
-   public EnigmaMachine(int r1, int r2, int r3){
+   public EnigmaMachine(int r1, int r2, int r3, String string1a){
       //plugboard definition
       plugboard = new char[2][26];
       //offsets setups
       rotor1Offset = 0;
       rotor2Offset = 0;
       rotor3Offset = 0;
+      string1 = string1a;
       //plugboard setup
       for (int x = 0; x < 2; x++){
          for (int y = 0; y < 26; y++){
@@ -19,7 +21,9 @@ public class EnigmaMachine{
          }
       }
    }
-   //plugboard
+   public String printString(){
+      return this.string1;
+   }
    
    public String enigmaEncryptor(String input){
       String finalstring = "";
@@ -68,9 +72,9 @@ public class EnigmaMachine{
    public static int lowercaseNumber(char a){
       return a - 97;
    }
-   public void main(String args[]){
-      EnigmaMachine enigma = new EnigmaMachine(0, 0, 0);
-      this.enigmaEncryptor("test");
+   public static void main(/*String args[]*/){
+      EnigmaMachine enigma = new EnigmaMachine(0, 0, 0, "test");
+      enigma.enigmaEncryptor("test");
 
    }
 }
