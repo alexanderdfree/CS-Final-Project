@@ -21,7 +21,7 @@ public class EnigmaMachine{
    }
    //plugboard
    
-   public String EnigmaEncryptor(String input){
+   public String enigmaEncryptor(String input){
       String finalstring = "";
       
       for (int i = 0; i < input.length(); i++){
@@ -53,7 +53,7 @@ public class EnigmaMachine{
       }
       return finalstring;
    }
-   public String EnigmaDecryptor(String input){
+   public String enigmaDecryptor(String input){
       String finalstring = "";
       //plugboard
       
@@ -70,7 +70,7 @@ public class EnigmaMachine{
    }
    public void main(String args[]){
       EnigmaMachine enigma = new EnigmaMachine(0, 0, 0);
-      this.EnigmaEncryptor("test");
+      this.enigmaEncryptor("test");
 
    }
 }
