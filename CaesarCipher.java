@@ -35,6 +35,22 @@ public class CaesarCipher
         char realchar = (char)code2;
         return realchar;
     }
+    public static char DecryptChar(char c, int offset2)
+    {
+        int offset = offset2 % 26;
+        
+        char realid;
+        int code = (int)c;
+        int code2 = 0;
+        if (code <= 'z' && code >= 'a') {
+            code2 = 97 + (code-97 + (26 - offset)) % 26;
+        }
+        else if (code <= 'Z' && code >= 'A') {
+            code2 = 65 + (code-65 + (26 - offset)) % 26;
+        }
+        char realchar = (char)code2;
+        return realchar;
+    }
     public static String Decryptor(String code, int offset2)
     {
         int offset = offset2 % 26;
