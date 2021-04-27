@@ -6,7 +6,7 @@ public class EnigmaMachine{
    private Rotor rotor2;
    private Rotor rotor3;
    //Constructor, initialize board
-   public EnigmaMachine(int r1, int r2, int r3){
+   public EnigmaMachine(){
       //plugboard definition
       plugboard = new char[2][26];
       reflector = new char[2][26];
@@ -50,15 +50,15 @@ public class EnigmaMachine{
       
       
    }
-   public String printString(){
+   /*public String printString(){
       return this.string1;
-   }
+   }*/
    
    public String enigmaEncryptor(String input){
       String finalstring = "";
       
       for (int i = 0; i < input.length(); i++){
-         if (this.rotor1Offset >= 26) {
+         /*if (this.rotor1Offset >= 26) {
             this.rotor1Offset = 0;
             this.rotor2Offset++;
          }
@@ -68,7 +68,7 @@ public class EnigmaMachine{
          }
          if (this.rotor3Offset >= 26) {
             this.rotor3Offset = 0;
-         }
+         }*/
          char thisChar = input.charAt(i);
          //plugboard
          
