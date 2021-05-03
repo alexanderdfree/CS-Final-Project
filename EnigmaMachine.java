@@ -97,8 +97,7 @@ public class EnigmaMachine{
          int pluggedChar = this.plugboard[charNumber(thisChar)];
          //rotor 1
          int rot1char = rotor1.inToOut(pluggedChar);
-         //CaesarCipher.EncryptChar(pluggedChar, rotor1.returnOffset());
-         //
+         
          //rotor 2
          int rot2char = rotor2.inToOut(rot1char);
          //rotor 3
@@ -107,57 +106,18 @@ public class EnigmaMachine{
          int reflectedChar = this.reflector[rot3char];
          
          int rot4char = rotor3.outToIn(reflectedChar);
-         //CaesarCipher.EncryptChar(pluggedChar, rotor1.returnOffset());
-         //
+
          //rotor 2
          int rot5char = rotor2.outToIn(rot4char);
          //rotor 3
          int rot6char = rotor1.outToIn(rot5char);
          
          finalstring += (char)(rot6char + 97);
-         //rotor1.rotate();
+         rotor1.rotate();
       }
       return finalstring;
-   }/*
-   public String enigmaDecryptor(String input){
-      String finalstring = "";
-      
-      for (int i = 0; i < input.length(); i++){
-         if (this.rotor1Offset >= 26) {
-            this.rotor1Offset = 0;
-            this.rotor2Offset++;
-         }
-         if (this.rotor2Offset >= 26) {
-            this.rotor2Offset = 0;
-            this.rotor3Offset++;
-         }
-         if (this.rotor3Offset >= 26) {
-            this.rotor3Offset = 0;
-         }
-         char thisChar = input.charAt(i);
-         //plugboard
-         
-         char char1 = this.plugboard[1][charNumber(thisChar)];
-         //rotor 1
-         char char2 = CaesarCipher.EncryptChar(char1, this.rotor1Offset);
-         //
-         //rotor 2
-         char char3 = CaesarCipher.EncryptChar(char2, this.rotor2Offset);
-         //rotor 3
-         char char4 = CaesarCipher.EncryptChar(char3, this.rotor3Offset);
-         //reflector
-         char reflectedChar = this.reflector[1][charNumber(thisChar)];
-         
-         char char5 = CaesarCipher.EncryptChar(reflectedChar, this.rotor3Offset);
-         char char6 = CaesarCipher.EncryptChar(char5, this.rotor2Offset);
-         char char7 = CaesarCipher.EncryptChar(char6, this.rotor1Offset);
-         char char8 = this.plugboard[1][charNumber(char7)];
-         
-         finalstring += char8;
-         this.rotor1Offset--;
-      }
-      return finalstring;
-   }*/
+   }
+   
    public static int charNumber(char a){
       if (a <= 'z' && a >= 'a'){
          return a - 97;
@@ -168,17 +128,14 @@ public class EnigmaMachine{
       }
       else return 0;
    }
+   
    public static void main(String args[]){
-      EnigmaMachine enigma = new EnigmaMachine();
+      EnigmaMachine encode = new EnigmaMachine();
+      EnigmaMachine decode = new EnigmaMachine();
       String testInput = "hellomynameisalex";
       StdOut.println(testInput);
-      StdOut.println(enigma.enigmaEncryptor(testInput));
-      StdOut.println(enigma.enigmaEncryptor(enigma.enigmaEncryptor(testInput)));
-      //StdOut.println(enigma.enigmaEncryptor(""));
-      //StdOut.println(enigma.enigmaEncryptor(""));
-      //StdOut.println(enigma.enigmaDecryptor(enigma.enigmaEncryptor("g")));
-      //EnigmaMachine enigma2 = new EnigmaMachine(0, 0, 0, "sfvy");
-      //StdOut.println(enigma.enigmaEncryptor("sfvy"));
-
+      String encrypted = encode.enigmaEncryptor(testInput);
+      StdOut.println(encrypted);
+      StdOut.println(decode.enigmaEncryptor(encrypted));
    }
 }

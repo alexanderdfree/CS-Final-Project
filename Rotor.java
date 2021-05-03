@@ -10,7 +10,7 @@ public class Rotor{
    //rotate
    public int inToOut(int input){
       return rotorArr[(input + offset) % 26];
-   } //fix 1 issue of 26 going over
+   }
    public int outToIn(int output){
       for (int i = 0; i < 26; i++){
          if (rotorArr[i] == output){
