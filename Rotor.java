@@ -1,27 +1,31 @@
 public class Rotor{
-   private char[] rotorArr;
+   private int[] rotorArr;
    private int offset;
-   public Rotor(char[] rotArr, int o){
-      rotorArr = rotArr;
+   public Rotor(int[] r, int o){
+      rotorArr = r;
       offset = o;
    }
    //input to output (int input)
    //output to input (int output)
    //rotate
-   public char inToOut(int input){
-      return rotorArr[input];
-   }
-   public char outToIn(int output){
-      int result = 0;
+   public int inToOut(int input){
+      return rotorArr[(input + offset) % 26];
+   } //fix 1 issue of 26 going over
+   public int outToIn(int output){
       for (int i = 0; i < 26; i++){
-         result = i;
-         if ((int)rotorArr[i] - 97 == output){
-            return (char)(result + 97);
+         if (rotorArr[i] == output){
+            return ( i - offset + 26 ) % 26;
          }
       }
-      return (char)(result + 97);
+      return 0;
    }
    public void rotate(){
       this.offset++;
+   }
+   public int returnOffset(){
+      return this.offset;
+   }
+   public void changeOffset(int newInt){
+      this.offset = newInt;
    }
 }
