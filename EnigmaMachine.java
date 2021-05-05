@@ -70,11 +70,7 @@ public class EnigmaMachine{
       
       
    }
-   
-   /*public String printString(){
-      return this.string1;
-   }*/
-   
+
    public String enigmaEncryptor(String input){
       String finalstring = "";
       
