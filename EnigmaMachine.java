@@ -24,11 +24,13 @@ public class EnigmaMachine{
       int[] rot2 = new int[26];
       int[] rot3 = new int[26];
       int[] plugboard1 = new int[26];
+      
+      //strings of rotor positions
       String rot1string = "DMTWSILRUYQNKFEJCAZBPGXOHV";
       String rot2string = "HQZGPJTMOBLNCIFDYAWVEUSRKX";
       String rot3string = "UQNTLSZFMREHDPXKIBVYGJCWOA";
       String plugboardstring = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      
+      //fill rotor char arrays
       for (int i = 0; i < 26; i ++){
          rot1[i] = charNumber(rot1string.charAt(i));
       }
@@ -41,16 +43,13 @@ public class EnigmaMachine{
       for (int i = 0; i < 26; i ++){
          plugboard1[i] = charNumber(plugboardstring.charAt(i));
       }
+      //create rotor classes using rotor char arrays
       rotor1 = new Rotor(rot1, 0);
       rotor2 = new Rotor(rot2, 0);
       rotor3 = new Rotor(rot3, 0);
       plugboard = new Rotor(plugboard1, 0);
       
-      /*for (int x = 0; x < 2; x++){
-         for (int y = 0; y < 26; y++){
-            this.reflector[x][y] = (char)(y + 97);
-         }
-      }*/
+      //setup reflector using individual chars
       this.reflector[0] = charNumber('c');
       this.reflector[1] = charNumber('d');
       this.reflector[2] = charNumber('a');
@@ -104,19 +103,28 @@ public class EnigmaMachine{
       String finalstring = "";
       
       for (int i = 0; i < input.length(); i++){
-         
+         //if rotor 1 is past the 26th position, return to position 0
          if (rotor1.returnOffset() >= 26) {
             rotor1.changeOffset(0);
-            rotor2.rotate();
+            rotor2.rotate(); //rotate rotor 2
          }
+         //if rotor 2 is past the 26th position, return to position 0
          if (rotor2.returnOffset() >= 26) {
             rotor2.changeOffset(0);
-            rotor3.rotate();
+            rotor3.rotate(); //rotate rotor 3
          }
+         //if rotor 3 is past the 26th position, return to position 0
          if (rotor3.returnOffset() >= 26) {
             rotor3.changeOffset(0);
          }
+         //take char of input string at index
          char thisChar = input.charAt(i);
+         //if the character isn't in the english alphabet
+         if (!(thisChar <= 'z' && thisChar >= 'a') || (thisChar <= 'Z' && thisChar >= 'A')){
+            finalstring += thisChar; //add it directly
+         }
+         //otherwise
+         else{
          //plugboard
          int pluggedChar = this.plugboard.inToOut(charNumber(thisChar));
          //rotor 1
@@ -128,18 +136,21 @@ public class EnigmaMachine{
          int rot3char = rotor3.inToOut(rot2char);
          //reflector
          int reflectedChar = this.reflector[rot3char];
-         
+         //rotor 3
          int rot4char = rotor3.outToIn(reflectedChar);
 
          //rotor 2
          int rot5char = rotor2.outToIn(rot4char);
-         //rotor 3
+         //rotor 1
          int rot6char = rotor1.outToIn(rot5char);
          //final plugboard
          
          int finalInt = plugboard.outToIn(rot6char);
          
-         finalstring += (char)(finalInt + 97);
+         //add char to final string
+         finalstring += (char)(finalInt + 97);}
+         
+         //rotate the first rotor
          rotor1.rotate();
       }
       return finalstring;
@@ -160,10 +171,11 @@ public class EnigmaMachine{
          0
       */
 
+      //if its a lowercase letter, return a - 97
       if (a <= 'z' && a >= 'a'){
          return a - 97;
       }
-      
+      //if its an uppercase letter, return a - 65
       if (a <= 'Z' && a >= 'A'){
          return a - 65;
       }
@@ -171,12 +183,13 @@ public class EnigmaMachine{
    }
    
    public static void main(String args[]){
+      //main function
       EnigmaMachine encode = new EnigmaMachine();
       EnigmaMachine decode = new EnigmaMachine();
-      String testInput = "hellomynameisalex";
-      StdOut.println(testInput);
+      String testInput = StdIn.readString();
+      StdOut.println("Original Text: " + testInput);
       String encrypted = encode.enigmaEncryptor(testInput);
-      StdOut.println(encrypted);
-      StdOut.println(decode.enigmaEncryptor(encrypted));
+      StdOut.println("Encrypted text: " + encrypted);
+      StdOut.println("Decrypted text (should match original): " + decode.enigmaEncryptor(encrypted));
    }
 }

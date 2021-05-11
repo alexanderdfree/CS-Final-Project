@@ -1,4 +1,5 @@
 public class Rotor{
+   //setup rotor class
    private int[] rotorArr;
    private int offset;
    public Rotor(int[] r, int o){
@@ -52,9 +53,9 @@ public class Rotor{
          rotor1.outToIn(2)
          3
       */
-      for (int i = 0; i < 26; i++){
-         if (rotorArr[i] == output){
-            return ( i - offset + 26 ) % 26;
+      for (int i = 0; i < 26; i++){ //for every int in the alphabet
+         if (rotorArr[i] == output){ //if the rotor output matches the argument
+            return ( i - offset + 26 ) % 26; //return it
          }
       }
       return 0;
@@ -77,7 +78,7 @@ public class Rotor{
          Offset: 2
          0 0 0 0 0 0 0 0 … (continued)
       */
-      this.offset++;
+      this.offset++; //rotate the rotor
    }
    public int returnOffset(){
       /*return the offset of the current rotor
@@ -94,7 +95,7 @@ public class Rotor{
          rotor1.returnOffset()
          25
       */
-      return this.offset;
+      return this.offset; // return the rotor offset
    }
    public void changeOffset(int newInt){
       /*change the offset of the current rotor
@@ -134,7 +135,7 @@ public class Rotor{
       */
       StdOut.println("Offset: " + this.offset);
       for (int i = 0; i < this.rotorArr.length; i++){
-         StdOut.print(this.rotorArr[i] + " ");
+         StdOut.print(this.rotorArr[i] + " "); //print the rotor
       }
    }
 }
