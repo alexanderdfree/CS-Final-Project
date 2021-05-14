@@ -184,6 +184,7 @@ public class EnigmaMachine{
    
    public static void main(String args[]){
       //main function
+      StdOut.println("What message would you like to encrypt/decrypt?");
       EnigmaMachine encode = new EnigmaMachine();
       EnigmaMachine decode = new EnigmaMachine();
       String testInput = StdIn.readString();
